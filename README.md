@@ -25,6 +25,52 @@ The dataset comprises monthly sales records from **January to December**, source
 
 ---
 
+# 📦 DIBS Retail Company — Sales Analysis and Predictive Modelling
+
+> A data-driven analysis of DIBS Retail Company's sales performance, uncovering trends in customer behaviour and developing a predictive model to forecast sales quantities and support strategic decision-making.
+
+---
+
+## 📋 Table of Contents
+
+- [Project Overview](#project-overview)
+- [Dataset](#dataset)
+- [Methodology](#methodology)
+  - [Data Collection](#1-data-collection)
+  - [Data Preparation and Cleaning](#2-data-preparation-and-cleaning)
+  - [Exploratory Data Analysis](#3-exploratory-data-analysis-eda)
+  - [Deep Analysis and Visualization](#4-deep-analysis-and-visualization)
+  - [Predictive Modelling](#5-predictive-modelling)
+  - [Insights and Recommendations](#6-insights-and-recommendations)
+- [Key Findings](#key-findings)
+- [Model Results](#model-results)
+- [Technologies Used](#technologies-used)
+- [How to Run](#how-to-run)
+- [Author](#author)
+
+---
+
+## Project Overview
+
+Dibs, a rapidly growing online retail company, seeks to overcome challenges in increasing sales and fostering customer loyalty. This project analyses historical sales data to uncover patterns in customer behaviour, identify top and underperforming products, and develop a machine learning model capable of forecasting sales quantities. Findings are translated into actionable recommendations across inventory management, sales strategy, marketing, and market expansion.
+
+---
+
+## Dataset
+
+The dataset comprises monthly sales records from **January to December**, sourced from 12 separate CSV files and combined into a single data frame for analysis.
+
+| Field | Description |
+|---|---|
+| `Order_ID` | Unique identifier for each order |
+| `Product` | Item sold to the customer |
+| `Quantity_Ordered` | Total quantity of items ordered |
+| `Price_Each` | Unit price of each product |
+| `Order_Date` | Date the customer requested shipment |
+| `Purchase_Address` | Full delivery address from the purchase order |
+
+---
+
 ## Methodology
 
 This project adopted a structured analytical approach across six stages:
@@ -35,28 +81,16 @@ Monthly sales CSV files (January–December) were loaded individually, verified 
 
 ### 2. Data Preparation and Cleaning
 
-A comprehensive cleaning process was applied to ensure data integrity across four steps:
-
-#### 🔄 Type Conversion
-- `Order_ID`, `Quantity_Ordered`, and `Price_Each` were converted from character to **numeric** format.
-- `Order_Date` was parsed into proper **date-time** format using `lubridate`.
-
-#### 🔧 Data Transformation
-- `Order_Date` was decomposed into separate fields: **date**, **month**, **year**, **hour**, and binary indicators for **weekends** and **holidays**.
-- `Purchase_Address` was split into **City**, **State**, and **Post Code** using the `separate` function.
-- Column names were standardised for readability (e.g. `Order.ID` → `Order_ID`).
-
-#### 🚨 Outlier Handling
-- Records with erroneous order years (**2001** and **2028**) were removed as temporal outliers.
-- Product name spelling errors were corrected using `gsub` and `mutate` (e.g. `Goo0gle Phone` → `Google Phone`, `USBC Charging Cable` → `USB-C Charging Cable`).
-- Rows containing system error flags (`##system error##`, `Fault error`) and empty product values were removed.
-
-#### 🧮 Sales Calculation
-- A derived **Total Sales** column was computed by multiplying `Quantity_Ordered` by `Price_Each` for each order, forming the primary revenue metric throughout the analysis.
+- 🔄 **Type Conversion** — `Order_ID`, `Quantity_Ordered`, and `Price_Each` converted to numeric; `Order_Date` parsed to date-time.
+- 🔧 **Data Transformation** — `Order_Date` decomposed into date, month, year, hour, weekend/holiday flags; `Purchase_Address` split into City, State, and Post Code.
+- 🚨 **Outlier Handling** — Removed records with invalid years (2001, 2028), corrected product name typos, and dropped system error and empty rows.
+- 🧮 **Sales Calculation** — Derived `Total_Sales` = `Quantity_Ordered` × `Price_Each` as the primary revenue metric.
 
 ### 3. Exploratory Data Analysis (EDA)
 
-EDA was conducted to understand the shape, distribution, and quality of the consolidated dataset. Summary statistics and frequency distributions were examined across products, cities, and time periods to surface early patterns — including the top and bottom performing products by quantity and revenue, and frequently co-purchased product pairs.
+- Profiled dataset shape, distributions, and missing/erroneous values.
+- Summarised top and bottom products by quantity sold and revenue.
+- Identified frequently co-purchased product pairs.
 
 ### 4. Deep Analysis and Visualization
 
@@ -76,7 +110,7 @@ Predictive modelling was implemented in two stages:
 
 Cluster labels were added as a feature to enhance model performance.
 
-**Model Training** — Two models were trained on a 70/30 train-test split using `Price_Each` and `Cluster` as predictors for `Quantity_Ordered`:
+**Model Training** — **Linear Regression** and **Decision Tree** were trained on a 70/30 train-test split using `Price_Each` and `Cluster` as predictors for `Quantity_Ordered`:
 
 | Metric | Linear Regression | Decision Tree |
 |---|---|---|
