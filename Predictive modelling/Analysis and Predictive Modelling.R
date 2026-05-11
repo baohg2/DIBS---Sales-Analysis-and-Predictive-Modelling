@@ -381,7 +381,7 @@ print(least_sold_product)
 
 
 
-# Deep Analysis and Visualization
+# 3. Deep Analysis and Visualization
 
 # a.Monthly sales trend vs monthly average sales
 
@@ -402,8 +402,6 @@ ggplot(sales_by_month_best_year, aes(x = Month, y = Sales)) +
         panel.background = element_blank(),
         panel.grid.major = element_line(color = "gray80"),panel.grid.minor = element_blank()) +
   scale_y_continuous(labels = label_dollar(scale = 1e-6, suffix = "M")) 
-
-
 
 # b.Sales by state
 
