@@ -31,25 +31,6 @@ The dataset comprises monthly sales records from **January to December**, source
 
 ---
 
-## 📋 Table of Contents
-
-- [Project Overview](#project-overview)
-- [Dataset](#dataset)
-- [Methodology](#methodology)
-  - [Data Collection](#1-data-collection)
-  - [Data Preparation and Cleaning](#2-data-preparation-and-cleaning)
-  - [Exploratory Data Analysis](#3-exploratory-data-analysis-eda)
-  - [Deep Analysis and Visualization](#4-deep-analysis-and-visualization)
-  - [Predictive Modelling](#5-predictive-modelling)
-  - [Insights and Recommendations](#6-insights-and-recommendations)
-- [Key Findings](#key-findings)
-- [Model Results](#model-results)
-- [Technologies Used](#technologies-used)
-- [How to Run](#how-to-run)
-- [Author](#author)
-
----
-
 ## Project Overview
 
 Dibs, a rapidly growing online retail company, seeks to overcome challenges in increasing sales and fostering customer loyalty. This project analyses historical sales data to uncover patterns in customer behaviour, identify top and underperforming products, and develop a machine learning model capable of forecasting sales quantities. Findings are translated into actionable recommendations across inventory management, sales strategy, marketing, and market expansion.
