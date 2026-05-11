@@ -25,33 +25,6 @@ The dataset comprises monthly sales records from **January to December**, source
 
 ---
 
-# 📦 DIBS Retail Company — Sales Analysis and Predictive Modelling
-
-> A data-driven analysis of DIBS Retail Company's sales performance, uncovering trends in customer behaviour and developing a predictive model to forecast sales quantities and support strategic decision-making.
-
----
-
-## Project Overview
-
-Dibs, a rapidly growing online retail company, seeks to overcome challenges in increasing sales and fostering customer loyalty. This project analyses historical sales data to uncover patterns in customer behaviour, identify top and underperforming products, and develop a machine learning model capable of forecasting sales quantities. Findings are translated into actionable recommendations across inventory management, sales strategy, marketing, and market expansion.
-
----
-
-## Dataset
-
-The dataset comprises monthly sales records from **January to December**, sourced from 12 separate CSV files and combined into a single data frame for analysis.
-
-| Field | Description |
-|---|---|
-| `Order_ID` | Unique identifier for each order |
-| `Product` | Item sold to the customer |
-| `Quantity_Ordered` | Total quantity of items ordered |
-| `Price_Each` | Unit price of each product |
-| `Order_Date` | Date the customer requested shipment |
-| `Purchase_Address` | Full delivery address from the purchase order |
-
----
-
 ## Methodology
 
 This project adopted a structured analytical approach across six stages:
