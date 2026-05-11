@@ -1,3 +1,5 @@
+# Import libraries 
+
 install.packages("dplyr")
 install.packages("viridis")  # For color palettes
 install.packages("maps")
@@ -14,6 +16,8 @@ library(scales)
 library(maps)
 library(dplyr)
 library(viridis)
+
+# 1. Data Preparation
 
 Jan <-read.csv("01_Sales_Jan.csv")
 Feb <-read.csv("02_Sales_Feb.csv")
@@ -195,7 +199,6 @@ head(combined_data)
 #Separating state and postcode 
 combined_data = separate(combined_data, column3, into = paste0("column", 1:2), sep = " ") 
 
-
 #Renaming them 
 colnames(combined_data)[8] = "State" 
 colnames(combined_data)[9] = "Post_Code" 
@@ -204,22 +207,16 @@ colnames(combined_data)[9] = "Post_Code"
 anyNA(combined_data) 
 colSums(is.na(combined_data)) 
 
-
-
-
 #Dropping NAs  
 combined_data = drop_na(combined_data) 
 anyNA(combined_data) 
 print(combined_data) 
 
-
 # Reviewing the string lengths of Order IDs to ensure their validity. 
 unique(nchar(combined_data$Order_ID)) 
 
-
 #Reviewing the frequency distribution of order quantities to ensure there are no irregularities. 
 table(combined_data$Quantity_Ordered) 
-
 
 #Checking distinct product names 
 table(combined_data$Product) 
@@ -241,9 +238,9 @@ head(combined_data)
 summary(combined_data)
 
 
-#TASK 2 
+# 2. EDA 
 
-#1Q)what is the worst year of sales and how much was earned ? 
+#Q1: what is the worst year of sales and how much was earned ? 
 # Calculating total sales per year
 yearly_sales <- combined_data %>%
   group_by(Year) %>%
@@ -257,7 +254,7 @@ worst_year <- yearly_sales %>%
 print(worst_year)
 
 
-#2Q)how much was earned in the beat year of sales?
+#Q2: how much was earned in the beat year of sales?
 # Find the year with the highest total sales
 best_year <- yearly_sales %>%
   filter(Total_Sales == max(Total_Sales))
@@ -266,7 +263,7 @@ best_year <- yearly_sales %>%
 print(best_year)
 
 
-#3Q)In the best year of sales which was the best month of sales?
+#Q3: In the best year of sales which was the best month of sales?
 # Filtering out data for the best year
 best_year_data <- combined_data %>%
   filter(Year == best_year$Year)
@@ -284,7 +281,7 @@ best_month <- monthly_sales %>%
 print(best_month)
 
 
-#4Q)In the best year year of sales how much was earned in the best month 
+#Q4: In the best year year of sales how much was earned in the best month 
 # Total earnings in the best month of the best year
 total_earnings_best_month <- best_month$Total_Sales
 
@@ -292,7 +289,7 @@ total_earnings_best_month <- best_month$Total_Sales
 print(total_earnings_best_month)
 
 
-#5Q)Which City had the most sales in the best year of sales?
+#Q5: Which City had the most sales in the best year of sales?
 # Calculate total sales for each city in the best year
 city_sales_best_year <- best_year_data %>%
   group_by(City) %>%
@@ -306,7 +303,8 @@ best_selling_city <- city_sales_best_year %>%
 print(best_selling_city)
 
 
-#6A)To maximise the likelihood of customers buying a product, what time should Dibs business be displaying advertisements in the best year of sales?
+#Q6: To maximise the likelihood of customers buying a product, 
+#what time should Dibs business be displaying advertisements in the best year of sales?
 # Calculate total sales for each hour in the best year
 hourly_sales <- best_year_data %>%
   mutate(Hour = hour(Order_Date)) %>%
@@ -321,7 +319,7 @@ peak_hours <- hourly_sales %>%
 print(peak_hours)
 
 
-#7Q)Which products are most often sold together 
+#Q7: Which products are most often sold together 
 # Sorting information by Order_ID, then extract the products for each order
 order_products <- combined_data %>%
   group_by(Order_ID) %>%
@@ -354,7 +352,7 @@ product_combination_counts <- order_product_combinations %>%
 head(product_combination_counts, 10)
 
 
-#8Q)Overall which product sold the most and why do you think it has sold the most?
+#Q8: Overall which product sold the most and why do you think it has sold the most?
 # Calculate total quantity ordered for each product
 product_sales <- combined_data %>%
   group_by(Product) %>%
@@ -368,7 +366,7 @@ best_selling_product <- product_sales %>%
 print(best_selling_product)
 
 
-#9Q)What is the least sold product in the best year of sales?
+#Q9: What is the least sold product in the best year of sales?
 # Calculating total quantity ordered for each product in the best year
 product_sales_best_year <- best_year_data %>%
   group_by(Product) %>%
@@ -383,9 +381,9 @@ print(least_sold_product)
 
 
 
-# Task 3
+# Deep Analysis and Visualization
 
-# a.       Monthly sales trend vs monthly average sales
+# a.Monthly sales trend vs monthly average sales
 
 # Aggregate sales by month in the best year
 sales_by_month_best_year <- aggregate(Price_Each * Quantity_Ordered ~ format(Order_Date, "%m"), data = best_year_data, FUN = sum)
@@ -407,7 +405,7 @@ ggplot(sales_by_month_best_year, aes(x = Month, y = Sales)) +
 
 
 
-# b.       Sales by state
+# b.Sales by state
 
 # Aggregate sales by month in the best year
 sales_by_state <- aggregate(Price_Each * Quantity_Ordered ~ format(State), data = best_year_data, FUN = sum)
@@ -483,7 +481,7 @@ ggplot(map_data_with_sales, aes(map_id = region, fill = Sales / 1e6)) +
 
 
 
-#c.        Top 10 products sold in the best year of sales
+#c.Top 10 products sold in the best year of sales
 # Aggregate sales by state in the best year
 top_products <- aggregate(Price_Each * Quantity_Ordered ~ format(Product), data = combined_data, FUN = sum)
 names(top_products) <- c("Product", "Sales")
@@ -519,7 +517,7 @@ ggplot(monthly_orders, aes(x = Month, y = Quantity_ordered)) +
         panel.background = element_blank(),
         panel.grid.major = element_line(color = "gray80"),panel.grid.minor = element_blank())
 
-# e.       Daily order trend vs daily average
+# e.Daily order trend vs daily average
 daily_orders <- best_year_data %>%  
   group_by(Date = as.Date(Order_Date)) %>%  
   summarise(Daily_Orders = n()) 
@@ -536,7 +534,7 @@ ggplot(daily_orders, aes(x=Date, y=Daily_Orders)) +
         panel.background = element_blank(),
         panel.grid.major = element_line(color = "gray80"),panel.grid.minor = element_blank())
 
-# f. Hourly order trend vs hourly average order 
+# f.Hourly order trend vs hourly average order 
 
 # Convert the 'Time' column to just the hour
 best_year_data <- best_year_data %>%
@@ -564,7 +562,7 @@ ggplot(hourly_orders, aes(x = factor(Hour), y = Hourly_Orders, group = 1)) +
 
 
 
-# Task 4 
+# 4. Predictive Modelling 
 
 # KMeans clustering to help improve the accuracy in predicting sales quantity
 # Select and scale the features to standardize features
