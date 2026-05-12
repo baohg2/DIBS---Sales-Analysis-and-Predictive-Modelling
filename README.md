@@ -85,7 +85,7 @@ Recommendations were developed across four strategic areas:
 
 ---
 
-## Technologies Used
+## Tools Used
 
 - **Language**: R
 - **Libraries**: `tidyverse`, `dplyr`, `tidyr`, `ggplot2`, `lubridate`, `rpart`, `caret`, `rpart.plot`, `corrplot`, `scales`, `maps`, `viridis`
