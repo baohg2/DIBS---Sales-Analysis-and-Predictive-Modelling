@@ -85,12 +85,6 @@ Recommendations were developed across four strategic areas:
 
 ---
 
-## Model Results
-
-The **Decision Tree** model was selected as the final forecasting model based on superior performance across MAE, MSE, and R² compared to Linear Regression. Predicted quantities combined with product price provide actionable sales forecasts for inventory and planning purposes.
-
----
-
 ## Technologies Used
 
 - **Language**: R
