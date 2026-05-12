@@ -1,4 +1,4 @@
-# 📦 DIBS Retail Company — Sales Analysis and Predictive Modelling
+# 📦 DIBS Retail Company - Sales Analysis and Predictive Modelling
 
 > A data-driven analysis of DIBS Retail Company's sales performance, uncovering trends in customer behaviour and developing a predictive model to forecast sales quantities and support strategic decision-making.
 
@@ -35,10 +35,10 @@ Monthly sales CSV files (January–December) were loaded individually, verified 
 
 ### 2. Data Preparation and Cleaning
 
-- 🔄 **Type Conversion** — `Order_ID`, `Quantity_Ordered`, and `Price_Each` converted to numeric; `Order_Date` parsed to date-time.
-- 🔧 **Data Transformation** — `Order_Date` decomposed into date, month, year, hour, weekend/holiday flags; `Purchase_Address` split into City, State, and Post Code.
-- 🚨 **Outlier Handling** — Removed records with invalid years (2001, 2028), corrected product name typos, and dropped system error and empty rows.
-- 🧮 **Sales Calculation** — Derived `Total_Sales` = `Quantity_Ordered` × `Price_Each` as the primary revenue metric.
+- 🔄 **Type Conversion** - `Order_ID`, `Quantity_Ordered`, and `Price_Each` converted to numeric; `Order_Date` parsed to date-time.
+- 🔧 **Data Transformation** - `Order_Date` decomposed into date, month, year, hour, weekend/holiday flags; `Purchase_Address` split into City, State, and Post Code.
+- 🚨 **Outlier Handling** - Removed records with invalid years (2001, 2028), corrected product name typos, and dropped system error and empty rows.
+- 🧮 **Sales Calculation** - Derived `Total_Sales` = `Quantity_Ordered` × `Price_Each` as the primary revenue metric.
 
 ### 3. Exploratory Data Analysis (EDA)
 
@@ -50,21 +50,21 @@ Monthly sales CSV files (January–December) were loaded individually, verified 
 
 Deep analysis was performed across three dimensions using `ggplot2` visualisations:
 
-- **Time** — Monthly and daily trends revealed strong Q4 seasonality, with December peaking at 28,137 orders and $4.6M in sales. Hourly analysis identified two peak ordering windows: **11AM–1PM** and **6PM–8PM**.
-- **Geography** — California drove **39.8%** of total sales, with San Francisco as the top city. Texas and New York followed at ~13.5% each.
-- **Product** — Accessories dominated order volume (low price, high quantity), while the MacBook Pro Laptop led revenue at **$8M (22% of total sales)**. The most common co-purchase pair was iPhone and Lightning Charging Cable (1,002 orders).
+- **Time** - Monthly and daily trends revealed strong Q4 seasonality, with December peaking at 28,137 orders and $4.6M in sales. Hourly analysis identified two peak ordering windows: **11AM–1PM** and **6PM–8PM**.
+- **Geography** - California drove **39.8%** of total sales, with San Francisco as the top city. Texas and New York followed at ~13.5% each.
+- **Product** - Accessories dominated order volume (low price, high quantity), while the MacBook Pro Laptop led revenue at **$8M (22% of total sales)**. The most common co-purchase pair was iPhone and Lightning Charging Cable (1,002 orders).
 
 ### 5. Predictive Modelling
 
 Predictive modelling was implemented in two stages:
 
-**K-Means Clustering** — Products were segmented by `Price_Each` and `Quantity_Ordered` into two clusters:
+**K-Means Clustering** - Products were segmented by `Price_Each` and `Quantity_Ordered` into two clusters:
 - **Cluster 1**: High quantity, low price (accessories)
 - **Cluster 2**: Low quantity, high price (premium electronics)
 
 Cluster labels were added as a feature to enhance model performance.
 
-**Model Training** — **Linear Regression** and **Decision Tree** were trained on a 70/30 train-test split using `Price_Each` and `Cluster` as predictors for `Quantity_Ordered`:
+**Model Training** - **Linear Regression** and **Decision Tree** were trained on a 70/30 train-test split using `Price_Each` and `Cluster` as predictors for `Quantity_Ordered`:
 
 | Metric | Linear Regression | Decision Tree |
 |---|---|---|
@@ -78,10 +78,10 @@ The **Decision Tree** outperformed Linear Regression across all metrics and was 
 
 Recommendations were developed across four strategic areas:
 
-- **Inventory Management** — Use the Decision Tree model to forecast demand for peak seasons (Q4). Prioritise stock for high-turnover, low-price items (e.g. AAA Batteries). Review and reduce or discontinue low-performing SKUs such as LG Dryers.
-- **Sales Strategy** — Run targeted seasonal promotions in Q4 and time-limited flash sales during peak hours (11AM–1PM, 6PM–8PM). Bundle frequently co-purchased products (e.g. iPhone + Lightning Charging Cable).
-- **Marketing** — Focus campaigns on high-value regions (San Francisco, California) and peak ad windows. Use K-means cluster insights to personalise messaging for each product segment and implement cross-selling strategies.
-- **Market Expansion** — Enter densely populated states proximate to existing markets — **Florida**, **Pennsylvania**, and **Illinois** — leveraging existing warehouse and logistics infrastructure.
+- **Inventory Management** - Use the Decision Tree model to forecast demand for peak seasons (Q4). Prioritise stock for high-turnover, low-price items (e.g. AAA Batteries). Review and reduce or discontinue low-performing SKUs such as LG Dryers.
+- **Sales Strategy** - Run targeted seasonal promotions in Q4 and time-limited flash sales during peak hours (11AM–1PM, 6PM–8PM). Bundle frequently co-purchased products (e.g. iPhone + Lightning Charging Cable).
+- **Marketing** - Focus campaigns on high-value regions (San Francisco, California) and peak ad windows. Use K-means cluster insights to personalise messaging for each product segment and implement cross-selling strategies.
+- **Market Expansion** - Enter densely populated states proximate to existing markets - **Florida**, **Pennsylvania**, and **Illinois** - leveraging existing warehouse and logistics infrastructure.
 
 ---
 
