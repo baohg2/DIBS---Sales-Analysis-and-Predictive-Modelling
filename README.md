@@ -1,6 +1,6 @@
 # 📦 DIBS Retail Company - Sales Analysis and Predictive Modelling
 
-> A data-driven analysis of DIBS Retail Company's sales performance, uncovering trends in customer behaviour and developing a predictive model to forecast sales quantities and support strategic decision-making.
+> Sales performance analysis, identify seasonal and regional sales patterns, uncover trends in customer behaviour and develop a predictive model to forecast sales quantities and support strategic decision-making.
 
 ---
 
